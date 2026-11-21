@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Twin Lanterns — Spot the Difference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>TWIN <span>LANTERNS</span> 🏮</h1>
+    <p>Spot the difference — three nights, twenty-two secrets.</p>
+  </header>
+
+  <div class="hud">
+    <div class="chip"><div class="lbl">Round</div><div class="val small"><span id="hud-round">1 / 3</span><br><span id="hud-scene">Lantern Market</span></div></div>
+    <div class="chip found-chip"><div class="lbl">Found</div><div class="val" id="hud-found">0 / 5</div><div class="dots" id="found-dots"></div></div>
+    <div class="chip" id="chip-time"><div class="lbl">Time left</div><div class="val" id="hud-time">3:00</div></div>
+    <div class="chip"><div class="lbl">Score</div><div class="val" id="hud-score">0</div></div>
+    <div class="chip"><div class="lbl">Hints</div><div class="val" id="hud-hints">3</div></div>
+  </div>
+
+  <div class="boards" id="boards">
+    <div class="board">
+      <div class="tag"><span>Panel <b>A</b></span><span>left picture</span></div>
+      <canvas class="panel" id="panel-a" width="640" height="400"></canvas>
+    </div>
+    <div class="board">
+      <div class="tag"><span>Panel <b>B</b></span><span>right picture</span></div>
+      <canvas class="panel" id="panel-b" width="640" height="400"></canvas>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="btn-hint" type="button">💡 Hint (H) — 25 pts</button>
+    <button id="btn-pause" type="button" class="ghost">⏸ Pause (P)</button>
+    <button id="btn-mute" type="button" class="ghost">🔊 Sound (M)</button>
+    <div id="message">Find every difference between the two pictures. Good hunting!</div>
+  </div>
+
+  <p class="kbd-hint">
+    <b>How to play:</b> the two pictures look the same, but they are not.
+    Click a difference on either panel to circle it. Find them all before the lanterns burn down.
+    Keyboard: <kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd> or <kbd>WASD</kbd> move the crosshair,
+    <kbd>Space</kbd> checks a spot, <kbd>Tab</kbd> switches panels, <kbd>H</kbd> hint,
+    <kbd>P</kbd> pause, <kbd>M</kbd> mute, <kbd>R</kbd> restart the round.
+    A wrong click costs 10 points and 3 seconds.
+  </p>
+</div>
+
+<div class="overlay" id="overlay-menu">
+  <div class="card">
+    <h2>TWIN LANTERNS 🏮</h2>
+    <h3>A spot-the-difference game in three nights</h3>
+    <p>Two pictures hang side by side in the lantern light. They look identical —
+       but <b>5 things</b> differ in the market, <b>7</b> by the koi pond and
+       <b>10</b> on the starlit rooftops. Click each difference on either picture
+       to ring it in gold.</p>
+    <ul>
+      <li><b>Finds</b> earn 100 points, more with a streak — misses cost 10 points and 3 seconds.</li>
+      <li><b>Hints</b> (3 per round) point at a hidden difference for 25 points.</li>
+      <li><b>Time bonus:</b> 5 points for every second left when a round is cleared.</li>
+      <li>Play with <b>mouse or keyboard</b> — arrows move the crosshair, Space checks a spot.</li>
+    </ul>
+    <div class="row"><button id="btn-start" type="button">🕯️ Light the lanterns — Play</button></div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay-clear" hidden>
+  <div class="card">
+    <h2>ROUND CLEAR! ✨</h2>
+    <h3 id="clear-round">Lantern Market</h3>
+    <p>You found every difference: <b id="clear-found">5 / 5</b></p>
+    <p class="score-line">Time bonus <b>+<span id="clear-bonus">0</span></b> &nbsp;·&nbsp; Total score <b id="clear-total">0</b></p>
+    <div class="row"><button id="btn-next" type="button">Next round →</button></div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay-over" hidden>
+  <div class="card">
+    <h2>TIME'S UP ⏳</h2>
+    <h3 id="over-round">Lantern Market</h3>
+    <p>The lanterns burned down with <b id="over-found">0 / 5</b> differences found.
+       The hidden ones are still out there — try the round again.</p>
+    <div class="row">
+      <button id="btn-retry" type="button">↻ Try this round again</button>
+      <button id="btn-menu" type="button" class="ghost">Back to menu</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay-win" hidden>
+  <div class="card">
+    <h2>ALL LANTERNS LIT! 🏮🏮🏮</h2>
+    <h3>You found all 22 differences across three nights.</h3>
+    <p class="score-line">Final score <b id="win-total">0</b></p>
+    <p>The market, the garden and the rooftops are yours — every secret found,
+       every lantern burning bright.</p>
+    <div class="row"><button id="btn-again" type="button">↻ Play again</button></div>
+  </div>
+</div>
+
+<script src="src/audio.js"></script>
+<script src="src/score.js"></script>
+<script src="src/render.js"></script>
+<script src="src/scenes.js"></script>
+<script src="src/input.js"></script>
+<script src="src/main.js"></script>
+</body>
+</html>
